@@ -5,57 +5,66 @@
 public class Node {
 	
 	//properties
-	private int num;
-	private Node next;
-	private Node previous;
+	private String string;
+	private Node left, right;
+	private int counter;
 	
 	/**
 	 * Constructor that sets num field
 	 * @param num - integer of the Node
 	 */
-	public Node(int num) {
-		this.num = num;
-		this.next = null;
-		this.previous = null;
+	public Node(String string) {
+		this.string = string;
+		left = null;
+		right = null;
+		counter = 0;
 	}
 	
 	/**
 	 * Accessor method for the next Node
 	 * @return the next Node
 	 */
-	public Node getNext() {
-		return next;
+	public Node getLeft() {
+		return left;
 	}
 
 	/**
 	 * Mutator method for the Previous Node
 	 * @param node - the new previous Node
 	 */
-	public void setPrevious(Node node) {
-		this.previous = node;
+	public void setLeft(Node node) {
+		left = node;
 	}
 
 	/**
 	 * Accessor method for the previous Node
 	 * @return the previous Node
 	 */
-	public Node getPrevious() {
-		return previous;
+	public Node getRigt() {
+		return right;
 	}
 
 	/**
 	 * Mutator method for the next Node
 	 * @param node - the new next Node
 	 */
-	public void setNext(Node node) {
-		this.next = node;
+	public void setRight(Node node) {
+		right = node;
 	}
 
 	/**
 	 * Accessor method
 	 * @return the int value of the Node
 	 */
-	public int getValue() {
-		return num;
+	public String getString() {
+		return string;
+	}
+	
+	public void increment() {
+		counter++;
+	}
+	
+	public int getCount() {
+		return counter;
 	}
 }
