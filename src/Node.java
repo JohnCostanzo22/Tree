@@ -40,7 +40,7 @@ public class Node {
 	 * Accessor method for the previous Node
 	 * @return the previous Node
 	 */
-	public Node getRigt() {
+	public Node getRight() {
 		return right;
 	}
 
@@ -62,6 +62,10 @@ public class Node {
 	
 	public void increment() {
 		counter++;
+	}
+	
+	public void decrement() {
+		counter--;
 	}
 	
 	public int getCount() {
