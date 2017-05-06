@@ -37,36 +37,93 @@ public class Tree {
 		}
 	}
 	
-	public void insert(Node node, String name) {
+	public void insert(Node node, Node insertNode) {
 		if(node == null) {
 			//throw
 		}
 		if(root == null) {
-			root = new Node(name);
+			root = insertNode;
 			root.increment();
 		}
-		else if(search(node, node.getString()) != null) {
+		else if(search(insertNode, insertNode.getString()) != null) {
 			node.increment();
 		}
 		else {
-			if(name.compareTo(node.getString()) < 0) {
+			if(insertNode.getString().compareTo(node.getString()) < 0) {
 				if(node.getLeft() != null) {
-					insert(node.getLeft(), name);
+					insert(node.getLeft(), insertNode);
 				}
 				else {
-					node.setLeft(new Node(name));
+					node.setLeft(insertNode);
 					node.getLeft().increment();
 				}
 			}
 			else {
 				if(node.getRight() != null) {
-					insert(node.getRight(), name);
+					insert(node.getRight(), insertNode);
 				}
 				else {
-					node.setRight(new Node(name));
+					node.setRight(insertNode);
 					node.getRight().increment();
 				}
 			}
+		}
+	}
+	
+	public void delete(Node node, Node delete) {
+		if(node == null) {
+			//do something
+		}
+		else if(delete == null) {
+			return;
+		}
+		else {
+			//if its the left node then
+			if(node.getLeft() == delete) {
+				Node temp = node.getLeft();
+				node.setLeft(null);
+				deletedInsert(temp.getLeft());
+				deletedInsert(temp.getRight());
+			}
+			else if(node.getRight() == delete) {
+				Node temp = node.getRight();
+				node.setRight(null);
+				deletedInsert(temp.getLeft());
+				deletedInsert(temp.getRight());
+			}
+			else {
+				if(node.getLeft() != null) {
+					delete(node.getLeft(), delete);
+				}
+				if(node.getRight() != null) {
+					delete(node.getRight(), delete);
+				}
+			}
+		}
+	}
+	
+	private void deletedInsert(Node node) {
+		if(node != null) {
+			Node tempLeft = node.getLeft();
+			Node tempRight = node.getRight();
+			node.setLeft(null);
+			node.setRight(null);
+			insert(root, node);
+			node.decrement();
+			if(tempLeft != null) {
+				deletedInsert(tempLeft);
+			}
+			if(tempRight != null) {
+				deletedInsert(tempRight);
+			}
+		}
+	}
+	
+	public void print(Node node) {
+		if(node != null) {
+			print(node.getLeft());
+			System.out.println(node.getString() + " " + node.getCount());
+			print(node.getRight());
 		}
 	}
 }
