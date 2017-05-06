@@ -1,4 +1,4 @@
-
+package tree;
 public class Tree {
 
 	private Node root;
@@ -38,12 +38,12 @@ public class Tree {
 	}
 	
 	public void insert(Node node, Node insertNode) {
-		if(node == null) {
-			//throw
-		}
 		if(root == null) {
 			root = insertNode;
 			root.increment();
+		}
+		if(node == null) {
+			//throw
 		}
 		else if(search(insertNode, insertNode.getString()) != null) {
 			node.increment();

@@ -2,6 +2,7 @@
  * Class that creates objects called Nodes That contain ints
  * and keeps track of the previous and next Nodes
  */
+package tree;
 public class Node {
 	
 	//properties
