@@ -36,17 +36,19 @@ public class Tree {
 			return null;
 		}
 	}
-	
+	public void insert(Node insertNode) {
+		insert(root, insertNode);
+	}
 	public void insert(Node node, Node insertNode) {
 		if(root == null) {
 			root = insertNode;
-			root.increment();
+			insertNode.increment();
 		}
 		if(node == null) {
 			//throw
 		}
-		else if(search(insertNode, insertNode.getString()) != null) {
-			node.increment();
+		else if(search(root , insertNode.getString()) != null) {
+			insertNode.increment();
 		}
 		else {
 			if(insertNode.getString().compareTo(node.getString()) < 0) {
@@ -56,6 +58,7 @@ public class Tree {
 				else {
 					node.setLeft(insertNode);
 					node.getLeft().increment();
+					
 				}
 			}
 			else {
@@ -69,13 +72,20 @@ public class Tree {
 			}
 		}
 	}
-	
+	public void delete(Node delete) {
+		delete(root,delete);
+	}
 	public void delete(Node node, Node delete) {
 		if(node == null) {
 			//do something
 		}
 		else if(delete == null) {
 			return;
+		}
+		else if(node == delete) {
+			root = null;
+			deletedInsert(node.getLeft());
+			deletedInsert(node.getRight());
 		}
 		else {
 			//if its the left node then
@@ -108,7 +118,7 @@ public class Tree {
 			Node tempRight = node.getRight();
 			node.setLeft(null);
 			node.setRight(null);
-			insert(root, node);
+			insert(node);
 			node.decrement();
 			if(tempLeft != null) {
 				deletedInsert(tempLeft);
@@ -118,7 +128,9 @@ public class Tree {
 			}
 		}
 	}
-	
+	public void print() {
+		print(root);
+	}
 	public void print(Node node) {
 		if(node != null) {
 			print(node.getLeft());
