@@ -1,5 +1,5 @@
 /*
- * Class that creates objects called Nodes That contain ints
+ * Class that creates objects called Nodes That contain Strings
  * and keeps track of the previous and next Nodes
  */
 package tree;
@@ -60,15 +60,22 @@ public class Node {
 	public String getString() {
 		return string;
 	}
-	
+	/**
+	 * method to increment counter
+	 */
 	public void increment() {
 		counter++;
 	}
-	
+	/**
+	 * method to decrement counter
+	 */
 	public void decrement() {
 		counter--;
 	}
-	
+	/**
+	 * Accessor method
+	 * @return - counter
+	 */
 	public int getCount() {
 		return counter;
 	}
