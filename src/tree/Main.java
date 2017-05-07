@@ -52,7 +52,11 @@ public class Main {
 		fileTree.delete(se);
 		System.out.println("Histogram of Sentence example with 'sentence' deleted: ");
 		fileTree.print();
-		
+		try {
+			System.out.println(fileTree.search("sentence").getString());
+		} catch(NullPointerException e) {
+			System.out.println("Node not found");
+		}
 		readFile("Random.txt", fileTree2);
 		System.out.println("Histogram of a large random text file: ");
 		//fileTree2.print();
