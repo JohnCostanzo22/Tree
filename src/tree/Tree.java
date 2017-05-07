@@ -19,6 +19,9 @@ public class Tree {
 		root = node;
 	}
 	
+	public Node search(String name) {
+		return search(root, name);
+	}
 	public Node search(Node node, String name) {
 		if(node != null) {
 			if(node.getString().equals(name)) {
@@ -48,10 +51,10 @@ public class Tree {
 			//throw
 		}
 		else if(search(root , insertNode.getString()) != null) {
-			insertNode.increment();
+			search(root , insertNode.getString()).increment();
 		}
 		else {
-			if(insertNode.getString().compareTo(node.getString()) < 0) {
+			if(insertNode.getString().compareToIgnoreCase(node.getString()) < 0) {
 				if(node.getLeft() != null) {
 					insert(node.getLeft(), insertNode);
 				}
@@ -82,20 +85,21 @@ public class Tree {
 		else if(delete == null) {
 			return;
 		}
-		else if(node == delete) {
+		else if(node.getString() != null && node.getString().compareTo(delete.getString()) == 0 ) {
 			root = null;
 			deletedInsert(node.getLeft());
 			deletedInsert(node.getRight());
 		}
 		else {
 			//if its the left node then
-			if(node.getLeft() == delete) {
-				Node temp = node.getLeft();
-				node.setLeft(null);
-				deletedInsert(temp.getLeft());
-				deletedInsert(temp.getRight());
-			}
-			else if(node.getRight() == delete) {
+			//check if its null first to avoid dealing with NullPointerExceptions
+				if(node.getLeft() != null && node.getLeft().getString().compareTo(delete.getString()) == 0) {
+					Node temp = node.getLeft();
+					node.setLeft(null);
+					deletedInsert(temp.getLeft());
+					deletedInsert(temp.getRight());
+				}
+			else if(node.getRight() != null && node.getRight().getString().compareTo(delete.getString()) == 0) {
 				Node temp = node.getRight();
 				node.setRight(null);
 				deletedInsert(temp.getLeft());

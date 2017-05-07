@@ -1,7 +1,15 @@
 package tree;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
 public class Main {
 	public static void main(String args[]) {
 		Tree tree = new Tree();
+		Tree fileTree = new Tree();
+		Tree fileTree2 = new Tree();
 		Node node1 = new Node("hi");
 		Node node2 = new Node("bob");
 		Node node3 = new Node("tim");
@@ -22,9 +30,66 @@ public class Main {
 		tree.insert(node6);
 		tree.insert(node7);
 		tree.insert(node10);
+		System.out.println("Tree of random nodes: ");
 		tree.print();
-		System.out.println(tree.search(node1, "bob").getString());
-		tree.delete(node1, node1);
+		tree.delete(node1);
+		System.out.println("Tree with the root (hi) deleted: ");
 		tree.print();
+		
+		tree.delete(node5);
+		System.out.println("Tree with node 'tay' deleted: ");
+		tree.print();
+		
+		//with a txt file
+		String fileName = "Sentence.txt";
+		readFile(fileName, fileTree);
+		System.out.println("Tree of Sentence example: ");
+		fileTree.print();
+		
+		System.out.print("Search for 'sentence' (should return the node if found): ");
+		System.out.println(fileTree.search("sentence").getString());
+		Node se = new Node("sentence");
+		fileTree.delete(se);
+		System.out.println("Tree of Sentence example with 'sentence' deleted: ");
+		fileTree.print();
+		
+		readFile("Random.txt", fileTree2);
+		//fileTree2.print();
+		
+	}
+	
+	public static void readFile(String fileName, Tree fileTree) {
+		String line = null;
+		try {
+            // FileReader reads text files in the default encoding.
+            FileReader fileReader = 
+                new FileReader(fileName);
+
+            // Always wrap FileReader in BufferedReader.
+            BufferedReader bufferedReader = 
+                new BufferedReader(fileReader);
+            
+            while((line = bufferedReader.readLine()) != null) {
+                String[] words = line.split("[+\\-*/\\^ ]+");
+                for(int i = 0; i < words.length; i++) {
+                	fileTree.insert(new Node(words[i]));
+                }
+            }   
+
+            // Always close files.
+            bufferedReader.close();         
+        }
+        catch(FileNotFoundException ex) {
+            System.out.println(
+                "Unable to open file '" + 
+                fileName + "'");                
+        }
+        catch(IOException ex) {
+            System.out.println(
+                "Error reading file '" 
+                + fileName + "'");                  
+            // Or we could just do this: 
+            // ex.printStackTrace();
+        }
 	}
 }
