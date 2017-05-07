@@ -30,30 +30,31 @@ public class Main {
 		tree.insert(node6);
 		tree.insert(node7);
 		tree.insert(node10);
-		System.out.println("Tree of random nodes: ");
+		System.out.println("Histogram of random nodes: ");
 		tree.print();
 		tree.delete(node1);
-		System.out.println("Tree with the root (hi) deleted: ");
+		System.out.println("Histogram with the root (hi) deleted: ");
 		tree.print();
 		
 		tree.delete(node5);
-		System.out.println("Tree with node 'tay' deleted: ");
+		System.out.println("Histogram with node 'tay' deleted: ");
 		tree.print();
 		
 		//with a txt file
 		String fileName = "Sentence.txt";
 		readFile(fileName, fileTree);
-		System.out.println("Tree of Sentence example: ");
+		System.out.println("Histogram of Sentence example: ");
 		fileTree.print();
 		
 		System.out.print("Search for 'sentence' (should return the node if found): ");
 		System.out.println(fileTree.search("sentence").getString());
 		Node se = new Node("sentence");
 		fileTree.delete(se);
-		System.out.println("Tree of Sentence example with 'sentence' deleted: ");
+		System.out.println("Histogram of Sentence example with 'sentence' deleted: ");
 		fileTree.print();
 		
 		readFile("Random.txt", fileTree2);
+		System.out.println("Histogram of a large random text file: ");
 		//fileTree2.print();
 		
 	}

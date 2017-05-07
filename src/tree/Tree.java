@@ -48,7 +48,10 @@ public class Tree {
 			insertNode.increment();
 		}
 		if(node == null) {
-			//throw
+			return;
+		}
+		if(insertNode == null) {
+			System.out.println("Can't insert a null Node");
 		}
 		else if(search(root , insertNode.getString()) != null) {
 			search(root , insertNode.getString()).increment();
@@ -80,7 +83,7 @@ public class Tree {
 	}
 	public void delete(Node node, Node delete) {
 		if(node == null) {
-			//do something
+			System.out.println("Can't delete a null Node");
 		}
 		else if(delete == null) {
 			return;
