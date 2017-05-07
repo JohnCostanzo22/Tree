@@ -1,3 +1,8 @@
+/**
+ * Test class for Tree 
+ * also contains method for reading in a file and 
+ * adding to tree
+ */
 package tree;
 
 import java.io.BufferedReader;
@@ -7,6 +12,7 @@ import java.io.IOException;
 
 public class Main {
 	public static void main(String args[]) {
+		//properties and random nodes
 		Tree tree = new Tree();
 		Tree fileTree = new Tree();
 		Tree fileTree2 = new Tree();
@@ -18,7 +24,7 @@ public class Main {
 		Node node6 = new Node("red");
 		Node node7 = new Node("blue");
 		Node node8 = new Node("bobby");
-		Node node9 = new Node("kud");
+		Node node9 = new Node("k");
 		Node node10 = new Node("xeno");
 		tree.insert(new Node(null), node1);
 		tree.insert(node1);
@@ -52,6 +58,7 @@ public class Main {
 		fileTree.delete(se);
 		System.out.println("Histogram of Sentence example with 'sentence' deleted: ");
 		fileTree.print();
+		System.out.print("Search for 'sentence' (after deleted out): ");
 		try {
 			System.out.println(fileTree.search("sentence").getString());
 		} catch(NullPointerException e) {
@@ -59,29 +66,29 @@ public class Main {
 		}
 		readFile("Random.txt", fileTree2);
 		System.out.println("Histogram of a large random text file: ");
-		//fileTree2.print();
-		
+		fileTree2.print();
 	}
 	
+	/**
+	 * reads in the file and adds each word to the tree
+	 * @param fileName - name of file
+	 * @param fileTree - tree to add words to
+	 */
 	public static void readFile(String fileName, Tree fileTree) {
 		String line = null;
 		try {
-            // FileReader reads text files in the default encoding.
             FileReader fileReader = 
                 new FileReader(fileName);
 
-            // Always wrap FileReader in BufferedReader.
             BufferedReader bufferedReader = 
                 new BufferedReader(fileReader);
             
             while((line = bufferedReader.readLine()) != null) {
-                String[] words = line.split("[+\\-*/\\^ ]+");
+                String[] words = line.split("[+\\-*/\\^. ]+");
                 for(int i = 0; i < words.length; i++) {
                 	fileTree.insert(new Node(words[i]));
                 }
             }   
-
-            // Always close files.
             bufferedReader.close();         
         }
         catch(FileNotFoundException ex) {
@@ -93,8 +100,6 @@ public class Main {
             System.out.println(
                 "Error reading file '" 
                 + fileName + "'");                  
-            // Or we could just do this: 
-            // ex.printStackTrace();
         }
 	}
 }

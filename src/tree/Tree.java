@@ -53,7 +53,7 @@ public class Tree {
 	 */
 	public Node search(Node node, String name) {
 		if(node != null) {
-			if(node.getString().equals(name)) {
+			if(node.getString().equalsIgnoreCase(name)) {
 				return node;
 			}
 			else {
@@ -138,7 +138,7 @@ public class Tree {
 		}
 		//compare the strings of the nodes not the actual nodes
 		//check the current nodes children to keep track of the parent node
-		else if(node.getString() != null && node.getString().compareTo(delete.getString()) == 0 ) {
+		else if(node.getString() != null && node.getString().compareToIgnoreCase(delete.getString()) == 0 ) {
 			root = null;
 			deletedInsert(node.getLeft());
 			deletedInsert(node.getRight());
@@ -146,14 +146,14 @@ public class Tree {
 		else {
 			//if its the left node then
 			//check if its null first to avoid dealing with NullPointerExceptions
-				if(node.getLeft() != null && node.getLeft().getString().compareTo(delete.getString()) == 0) {
+				if(node.getLeft() != null && node.getLeft().getString().compareToIgnoreCase(delete.getString()) == 0) {
 					Node temp = node.getLeft();
 					node.setLeft(null);
 					deletedInsert(temp.getLeft());
 					deletedInsert(temp.getRight());
 				}
 			//right node
-			else if(node.getRight() != null && node.getRight().getString().compareTo(delete.getString()) == 0) {
+			else if(node.getRight() != null && node.getRight().getString().compareToIgnoreCase(delete.getString()) == 0) {
 				Node temp = node.getRight();
 				node.setRight(null);
 				deletedInsert(temp.getLeft());
